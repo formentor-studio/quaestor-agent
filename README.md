@@ -21,11 +21,15 @@ pip install -r requirements.txt
 python3 quaestor.py
 ```
 
-2. Request quaestor to record a customer invoice:
+2. Request quaestor to record customer invoice:
 
 **Accountant >** `Record the invoice AB123 from customer Cervantes for $1,605`
 
-> 🛑 It is supported just `customer invoices` and `customer payments`
+3. Request quaestor to record customer payment:
+
+**Accountant >** `Record payment of invoice AB123 from customer Cervantes for $1,605`
+
+> 🛑 It is implemented just transactions `customer invoices` and `customer payments`
 
 ## How it works
 It's been defined a Multi-Agent applying the strategy `Orchestrator control`.
