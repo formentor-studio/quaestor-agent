@@ -27,6 +27,7 @@ agent = Agent(
 
     ## Important Notes
     - Never post a journal entry if you do not know the required ledger accounts.
+    - Ask the user if you need more information to get required ledger accounts.
     """,
     tools=[lookup_ledger_account_of_customer, lookup_ledger_account_for_cash, post_journal_entry_for_customer_payment],
 )
