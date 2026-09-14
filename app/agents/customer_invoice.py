@@ -1,0 +1,34 @@
+from strands import Agent
+from app.ledger_tools import (
+    lookup_ledger_account_of_customer, 
+    lookup_ledger_account_for_revenue, 
+    lookup_ledger_account_for_output_vat, 
+    post_journal_entry_for_customer_invoice
+)
+
+# Get LLM model
+#####
+from app.util.model_provider import ModelProvider
+modelProvider = ModelProvider()
+_, model_journal_entry = modelProvider.get()
+
+# Agent definition
+#####
+agent = Agent(
+    name="customer-invoice",
+    description="Post journal entry for a customer invoice",
+    model=model_journal_entry,
+    callback_handler=None,
+    system_prompt="""
+    Post journal entries for customer invoices.
+
+    1. Look up ledger account for the customer using `lookup_ledger_account_of_customer`.
+    2. Look up ledger account for revenue using `lookup_ledger_account_for_revenue`.
+    3. Look up ledger account for for Output VAT `lookup_ledger_account_for_output_vat`.
+    4. Post journal entry for customer invoice using `post_journal_entry_for_customer_invoice` with required ledger accounts and invoice amount.
+
+    ## Important Notes
+    - Never post a journal entry if you do not know the required ledger accounts.
+    """,
+    tools=[lookup_ledger_account_of_customer, lookup_ledger_account_for_revenue, lookup_ledger_account_for_output_vat, post_journal_entry_for_customer_invoice],
+)
