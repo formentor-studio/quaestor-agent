@@ -26,19 +26,6 @@ agent = Agent(
     ],
 )
 
-request = """
-Create journal entry for invoice of customer 'Joaquin' with amount 1000 euros
-"""
-request="""
-Record purchase of 10 computers to ACME
-"""
-request="""
-Record the invoice AB123 from customer Cervantes for $1,605
-"""
-request="""
-Record payment of invoice AB123 from customer Cervantes for $1,605
-"""
-result = agent(request)
 
 while True:
     user_input = input("\nAccountant > ").strip()
@@ -52,14 +39,3 @@ while True:
     for block in content:
         if "text" in block:
             print(block["text"])
-
-print()
-print("RESULT")
-print("="*6)
-print(str(result))
-
-print()
-print("MESSAGES")
-print("="*8)
-import json
-print(json.dumps(agent.messages, indent=2))
